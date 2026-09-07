@@ -24,6 +24,7 @@ test('create an order with POST', {tag: '@smoke'}, async ({ request }) => {
   });
 
   const responseBody = await response.json();
+  console.log('Response Body:', responseBody);
 
   const orderId = responseBody.data.orderId;
 
