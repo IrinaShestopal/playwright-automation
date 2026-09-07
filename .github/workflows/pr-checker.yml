@@ -1,0 +1,53 @@
+name: PR Checker
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:
+      - main
+
+jobs:
+
+  branch-name:
+    name: Branch name check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate branch name
+        run: |
+          BRANCH="${{ github.head_ref }}"
+
+          if [[ ! "$BRANCH" =~ ^[A-Za-z]{2}-[0-9]{3}-.+$ ]]; then
+            echo "Invalid branch name: $BRANCH"
+            echo "Expected format: AB-123-description"
+            exit 1
+          fi
+
+          echo "Branch name is valid: $BRANCH"
+
+
+  playwright-check:
+    name: Playwright checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+
+      - name: Validate Playwright tests
+        run: npx playwright test --list
