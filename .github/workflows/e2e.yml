@@ -3,6 +3,9 @@ name: Demo App E2E
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   e2e:
     name: Demo App Playwright Test
@@ -36,3 +39,13 @@ jobs:
         id: timestamp
         run: |
           echo "value=$(TZ=Europe/Dublin date +'%Y-%m-%d_%H-%M')" >> "$GITHUB_OUTPUT"
+
+      - name: Publish Allure report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./allure-report
+          destination_dir: reports/${{ steps.timestamp.outputs.value }}
+          keep_files: true
