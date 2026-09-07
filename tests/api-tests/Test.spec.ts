@@ -7,6 +7,12 @@ test('my api test', async ({request}) => {
 
   expect(response.status()).toBe(200);
 
+for (const product of responseBody.data) {
+  expect(product).toMatchObject({
+    id: expect.any(String),
+  });
+}
+
   expect(response.headers()['content-type']).toBe('application/json');
 
 });
