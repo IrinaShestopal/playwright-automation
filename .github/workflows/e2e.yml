@@ -31,6 +31,8 @@ jobs:
         if: always()
         run: npx allure generate allure-results --clean -o allure-report
 
-      - name: Generate Allure report
+      - name: Generate report timestamp
         if: always()
-        run: npx allure generate allure-results --clean -o allure-report
+        id: timestamp
+        run: |
+          echo "value=$(TZ=Europe/Dublin date +'%Y-%m-%d_%H-%M')" >> "$GITHUB_OUTPUT"
