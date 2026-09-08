@@ -53,10 +53,8 @@ jobs:
       - name: Add test reports to job summary
         if: always()
         run: |
-          echo "## 📊 Test Reports" >> "$GITHUB_STEP_SUMMARY"
+          echo "## 📬 Test Reports" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "| Report | Link |" >> "$GITHUB_STEP_SUMMARY"
           echo "|--------|------|" >> "$GITHUB_STEP_SUMMARY"
-          echo "| 📈 Allure | [Open Report](https://irinashestopal.github.io/playwright-automation/reports/${{ steps.timestamp.outputs.value }}/) |" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "<sub>Job summary generated at run-time</sub>" >> "$GITHUB_STEP_SUMMARY"
+          echo "| 📌 Allure | [Open Report](https://irinashestopal.github.io/playwright-automation/reports/${{ steps.timestamp.outputs.value }}/) |" >> "$GITHUB_STEP_SUMMARY"
