@@ -1,0 +1,1 @@
+[{"uid":"e5e85ce69b875fa1","name":"verify app heading","time":{"start":1788867439672,"stop":1788867440360,"duration":688},"status":"passed","severity":"normal"},{"uid":"cfccf8167a99f0dd","name":"verify click button","time":{"start":1788867452712,"stop":1788867458078,"duration":5366},"status":"failed","severity":"normal"}]
